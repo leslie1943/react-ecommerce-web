@@ -13,6 +13,8 @@ const Navigation = () => {
   // AppState对应而都是 state 的类型
   // RouterState: 对应的是返回值的类型
   const router = useSelector<AppState, RouterState>((state) => state.router)
+
+  // 根据
   const pathname = router.location.pathname
   const isHome = useActive(pathname, '/')
   const isShop = useActive(pathname, '/shop')
