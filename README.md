@@ -114,3 +114,18 @@ ReactDOM.render(
   document.getElementById('root')
 )
 ```
+
+## STEP 9: Action, Saga, Reducer 
+
+### Actions
+- 在`src/store/action`文件下新建`auth.action.ts`
+1. 定义 `action_const` 常量: 为 各个 `Action` 的 `interface` 使用
+2. 定义 `action_interface` 接口: 为 各个 `Action creator` 的返回值 使用
+3. 定义 `creator_fn_sync` | `creator_fn_async`: `creator` 函数, 返回一个具体的 `action` 格式为`2`中定义的 `action_interface`, 这些 `creator_fun`会在<font color="#F56C6C">业务组件</font> 或者 <font color="#F56C6C">saga</font>中被调用
+4. 定义 `XxxUnionType`: 联合类型, 在`xxxReducer`函数中的`action`参数使用, 因为触发这个`reducer`的`action`类型是不一定的(`2`中的其中一个)
+
+### Saga
+- 在`src/store/sagas`文件下新建`auth.saga.ts`
+1. 定义并导出 `generator`函数
+2. 在`generator`函数中执行`yield takeEvery(XXXX, handleXXXX)`,其中`XXXX`是`saga`捕捉到的异步请求,这个异步请求是组件触发的在`Actions`步骤`2`中定义的`creator_fn_async`函数, 并执行`handleXXXX`方法去执行异步请求(`axios`)
+3. 执行`handleXXXX`函数,完成异步请求,并`put()`在`Actions`步骤`2`中定义的`creator_fn_sync`函数,返回在`Actions`中定义的某个`action_interface`,触发`reducer`去执行状态更新
