@@ -4,14 +4,13 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import Routes from './Routes'
 import store, { history } from './store'
+import './style.css'
 
 ReactDOM.render(
-  // <React.StrictMode>
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Routes />
     </ConnectedRouter>
   </Provider>,
-  // </React.StrictMode>
   document.getElementById('root')
 )
