@@ -134,3 +134,21 @@ ReactDOM.render(
 - 🈚 React Hook useEffect has a missing dependency: 'form'. Either include it or remove the dependency array.
 - 首先安装 `yarn add eslint-plugin-react-hooks@next`
 - 然后配置 `eslintrc.js`, 在 `rules`属性中添加 ` 'react-hooks/exhaustive-deps': 'off',`
+
+
+### 受保护的路由调用过程
+1. Step-1 在 `Routes.tsx`
+```jsx
+<PrivateRoute path="/user/dashboard" component={Dashboard} />
+```
+
+2. Step-2 在 `PrivateRoute.tsx`
+```tsx
+interface PrivateRouteProps extends RouteProps {
+  component: React.ComponentType<any>
+}
+// 返回一个 Function Component<PrivateRouteProps>
+// 重新返回一个 <Route>
+// 在<Route>中使用render={}来判断返回的组件
+```
+3. 具体逻辑参考 `src/Routes.tsx`, `src/components/admin/PrivateRoutes.tsx`
