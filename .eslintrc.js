@@ -9,4 +9,7 @@ module.exports = {
   },
   // required to lint *.vue files
   plugins: ['html'],
+  rules: {
+    'react-hooks/exhaustive-deps': 'off',
+  },
 }

@@ -95,3 +95,12 @@
     width: auto;
     max-width: 100%;
 }
+
+.sign-form{
+    padding: 50px;
+    border: 1px solid gainsboro;
+    border-radius: 10px;
+    width: 480px;
+    margin: 0 auto;
+    text-align: center;
+}

@@ -1,6 +1,7 @@
 export const SIGNUP = 'SIGNUP'
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
 export const SIGNUP_FAIL = 'SIGNUP_FAIL'
+export const SIGNUP_RESET = 'SIGN_RESET'
 
 // 参数接口
 export interface SignupPayload {
@@ -24,6 +25,10 @@ export interface SignupFailAction {
   message: string
 }
 
+export interface SignupResetAction {
+  type: typeof SIGNUP_RESET
+}
+
 // 注册的 creator action: 返回一个 action. ⏰⏰ 这里的 actions 在业务组件会被 dispatch
 export const signup = (payload: SignupPayload): SignupAction => ({
   type: SIGNUP,
@@ -41,8 +46,14 @@ export const signupFail = (message: string): SignupFailAction => ({
   message,
 })
 
+// 清空状态
+export const signupReset = (): SignupResetAction => ({
+  type: SIGNUP_RESET,
+})
+
 // 联合类型: 在 reducer 里会被使用到, 因为 reducer 接收的 action 可能是这些
 export type AuthUnionType =
   | SignupAction
   | SignupSuccessAction
   | SignupFailAction
+  | SignupResetAction

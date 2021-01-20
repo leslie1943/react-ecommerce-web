@@ -17,6 +17,7 @@
     "babel-eslint": "^10.1.0",
     "connected-react-router": "^6.8.0",
     "eslint-plugin-html": "^6.1.1",
+    "eslint-plugin-react-hooks": "^0.0.0-8e5adfbd7",
     "moment": "^2.29.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

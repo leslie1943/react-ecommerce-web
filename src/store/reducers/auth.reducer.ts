@@ -3,6 +3,7 @@ import {
   SIGNUP,
   SIGNUP_FAIL,
   SIGNUP_SUCCESS,
+  SIGNUP_RESET,
 } from '../actions/auth.action'
 
 // reducer
@@ -10,6 +11,7 @@ export interface AuthState {
   signup: {
     loaded: boolean
     success: boolean
+    message: string
   }
 }
 
@@ -18,6 +20,7 @@ const initialState: AuthState = {
   signup: {
     loaded: false,
     success: false,
+    message: '',
   },
 }
 
@@ -26,6 +29,7 @@ export default function authReducer(
   action: AuthUnionType
 ) {
   switch (action.type) {
+    // 登录
     case SIGNUP:
       return {
         ...state,
@@ -34,6 +38,7 @@ export default function authReducer(
           success: false,
         },
       }
+    //  登录成功
     case SIGNUP_SUCCESS:
       return {
         ...state,
@@ -42,7 +47,7 @@ export default function authReducer(
           success: true,
         },
       }
-
+    // 登录失败
     case SIGNUP_FAIL:
       return {
         ...state,
@@ -50,6 +55,16 @@ export default function authReducer(
           loaded: true,
           success: false,
           message: action.message,
+        },
+      }
+    // 重置
+    case SIGNUP_RESET:
+      return {
+        ...state,
+        signup: {
+          loaded: false,
+          success: false,
+          message: '',
         },
       }
     default:

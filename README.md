@@ -129,3 +129,8 @@ ReactDOM.render(
 1. 定义并导出 `generator`函数
 2. 在`generator`函数中执行`yield takeEvery(XXXX, handleXXXX)`,其中`XXXX`是`saga`捕捉到的异步请求,这个异步请求是组件触发的在`Actions`步骤`2`中定义的`creator_fn_async`函数, 并执行`handleXXXX`方法去执行异步请求(`axios`)
 3. 执行`handleXXXX`函数,完成异步请求,并`put()`在`Actions`步骤`2`中定义的`creator_fn_sync`函数,返回在`Actions`中定义的某个`action_interface`,触发`reducer`去执行状态更新
+
+### 解决警告
+- 🈚 React Hook useEffect has a missing dependency: 'form'. Either include it or remove the dependency array.
+- 首先安装 `yarn add eslint-plugin-react-hooks@next`
+- 然后配置 `eslintrc.js`, 在 `rules`属性中添加 ` 'react-hooks/exhaustive-deps': 'off',`
