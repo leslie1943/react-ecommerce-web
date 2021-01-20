@@ -4,11 +4,19 @@ import {
   SIGNUP_FAIL,
   SIGNUP_SUCCESS,
   SIGNUP_RESET,
+  SIGNIN,
+  SIGNIN_SUCCESS,
+  SIGNIN_FAIL,
 } from '../actions/auth.action'
 
 // reducer
 export interface AuthState {
   signup: {
+    loaded: boolean
+    success: boolean
+    message: string
+  }
+  signin: {
     loaded: boolean
     success: boolean
     message: string
@@ -22,6 +30,11 @@ const initialState: AuthState = {
     success: false,
     message: '',
   },
+  signin: {
+    loaded: false,
+    success: false,
+    message: '',
+  },
 }
 
 export default function authReducer(
@@ -29,7 +42,7 @@ export default function authReducer(
   action: AuthUnionType
 ) {
   switch (action.type) {
-    // 登录
+    // 注册
     case SIGNUP:
       return {
         ...state,
@@ -38,7 +51,7 @@ export default function authReducer(
           success: false,
         },
       }
-    //  登录成功
+    //  注册成功
     case SIGNUP_SUCCESS:
       return {
         ...state,
@@ -47,7 +60,7 @@ export default function authReducer(
           success: true,
         },
       }
-    // 登录失败
+    // 注册失败
     case SIGNUP_FAIL:
       return {
         ...state,
@@ -57,7 +70,7 @@ export default function authReducer(
           message: action.message,
         },
       }
-    // 重置
+    // 注册重置
     case SIGNUP_RESET:
       return {
         ...state,
@@ -65,6 +78,36 @@ export default function authReducer(
           loaded: false,
           success: false,
           message: '',
+        },
+      }
+    // 登录
+    case SIGNIN:
+      return {
+        ...state,
+        signin: {
+          loaded: false,
+          success: false,
+          message: '',
+        },
+      }
+    // 登录成功
+    case SIGNIN_SUCCESS:
+      return {
+        ...state,
+        signin: {
+          loaded: true,
+          success: true,
+          message: '',
+        },
+      }
+    // 登录失败
+    case SIGNIN_FAIL:
+      return {
+        ...state,
+        signin: {
+          loaded: true,
+          success: false,
+          message: action.message,
         },
       }
     default:

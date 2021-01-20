@@ -12,14 +12,14 @@ import { AuthState } from '../../store/reducers/auth.reducer'
 import Layout from './Layout'
 
 const SignUp = () => {
+  // 获取 dispatch 方法
   const dispatch = useDispatch()
   // 获取注册结果
   const auth = useSelector<AppState, AuthState>((state) => state.auth)
-
   const [form] = Form.useForm()
 
+  // 表单提交事件
   const onFinish = (values: SignupPayload) => {
-    // 获取 dispatch 方法
     dispatch(signup(values))
   }
 

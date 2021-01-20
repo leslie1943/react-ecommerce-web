@@ -1,7 +1,12 @@
 import axios from 'axios'
 import { takeEvery, put } from 'redux-saga/effects'
 import { API } from '../../config'
+import { setItem } from '../../utils/localStore'
 import {
+  SIGNIN,
+  SigninAction,
+  signinFail,
+  signinSuccess,
   SIGNUP,
   SignupAction,
   signupFail,
@@ -11,19 +16,27 @@ import {
 function* handleSignup(action: SignupAction) {
   try {
     yield axios.post(`${API}/signup`, action.payload)
-    // signupSuccess() => { type: SIGNUP_SUCCESS }
-    // put 会触发 reducer 去更新状态
-    yield put(signupSuccess())
+    yield put(signupSuccess()) // signupSuccess() => { type: SIGNUP_SUCCESS }  put 会触发 reducer 去更新状态
   } catch (error) {
-    // signupFail() =>  { type: SIGNUP_FAIL, message: '' }
     console.info(error)
-    yield put(signupFail(error.response.data.error))
+    yield put(signupFail(error.response.data.error)) // signupFail() =>  { type: SIGNUP_FAIL, message: '' }
   }
 }
+
+function* handleSignin(action: SigninAction) {
+  try {
+    const response = yield axios.post(`${API}/signin`, action.payload)
+    setItem('jwt', response.data) // 存储本地数据
+    yield put(signinSuccess()) // put 会触发 reducer 去更新状态
+  } catch (error) {
+    console.info(error)
+    yield put(signinFail(error.response.data.error)) // signinFail() =>  { type: SIGNIN_FAIL, message: '' }
+  }
+}
+
 export default function* authSaga() {
-  // 接收 action:'SIGNUP'
-  // 这个 'SIGNUP' 的动作是在 component 触发,然后被saga捕获
-  yield takeEvery(SIGNUP, handleSignup)
+  yield takeEvery(SIGNUP, handleSignup) // 接收 action:'SIGNUP'; 这个 'SIGNUP' 的动作是在 component 触发,然后被saga捕获
+  yield takeEvery(SIGNIN, handleSignin) // 接收 action:'SIGNIN'; 这个 'SIGNIN' 的动作是在 component 触发,然后被saga捕获
 }
 
 /**
