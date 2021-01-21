@@ -16,7 +16,7 @@ const Navigation = () => {
   // RouterState: 对应的是返回值的类型
   const router = useSelector<AppState, RouterState>((state) => state.router)
 
-  // 根据
+  // 根据路由显示高亮
   const pathname = router.location.pathname
   const isHome = useActive(pathname, '/')
   const isShop = useActive(pathname, '/shop')
@@ -24,7 +24,7 @@ const Navigation = () => {
   const isSignup = useActive(pathname, '/signup')
   const isDashboard = useActive(pathname, getDashboardUrl())
 
-  // 根据角色获取url
+  // 根据角色获取url: 如果要改写成箭头函数, 需要把代码放到调用之前
   function getDashboardUrl() {
     let url = '/user/dashboard'
     if (isAuth()) {
