@@ -8,6 +8,7 @@ import SignIn from './components/core/SignIn'
 import SignUp from './components/core/SignUp'
 import AdminDashboard from './components/admin/AdminDashboard'
 import AdminRoute from './components/admin/AdminRoute'
+import AddCategory from './components/admin/AddCategory'
 
 const Routes = () => {
   return (
@@ -20,6 +21,7 @@ const Routes = () => {
         {/* 受保护的路由: 非登录状态下不可访问 */}
         <PrivateRoute path="/user/dashboard" component={UserDashboard} />
         <AdminRoute path="/admin/dashboard" component={AdminDashboard} />
+        <AdminRoute path="/create/category" component={AddCategory} />
       </Switch>
     </HashRouter>
   )

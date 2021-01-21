@@ -16,7 +16,7 @@ const Layout: FC<Props> = ({ children, title, subTitle }) => {
     <div>
       <Navigation />
       <PageHeader className="jumbotron" title={title} subTitle={subTitle} />
-      <div style={{ width: '85%', margin: '0 auto' }}> {children}</div>
+      <div style={{ width: '95%', margin: '0 auto' }}> {children}</div>
     </div>
   )
 }
