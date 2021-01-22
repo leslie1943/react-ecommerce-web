@@ -1,5 +1,16 @@
-import { Button, Form, Input, Select, Upload, Spin, message } from 'antd'
-import React, { useEffect, useState } from 'react'
+import {
+  Button,
+  Form,
+  Input,
+  Select,
+  Upload,
+  Spin,
+  message,
+  PageHeader,
+} from 'antd'
+import React, { FC, useEffect, useState } from 'react'
+import { RouteComponentProps } from 'react-router-dom'
+
 import Layout from '../core/Layout'
 
 import { UploadOutlined } from '@ant-design/icons'
@@ -13,7 +24,10 @@ import { API } from '../../config'
 import { isAuth } from '../../helpers/auth'
 import { Jwt } from '../../store/models/auth'
 
-const AddProduct = () => {
+interface RouteProps extends RouteComponentProps<any> {}
+
+//  FC<Props>只是定义参数的类型,真正的Props还是需要在()操作
+const AddProduct: FC<RouteProps> = (props) => {
   const dispatch = useDispatch()
 
   // 获取本地数据
@@ -68,10 +82,14 @@ const AddProduct = () => {
       },
     }
     return (
-      <Form initialValues={{ category: '' }} onFinish={onFinish}>
-        <Form.Item>
+      <Form
+        initialValues={{ category: '' }}
+        onFinish={onFinish}
+        style={{ padding: 10 }}
+      >
+        <Form.Item label="商品封面">
           <Upload {...props}>
-            <Button icon={<UploadOutlined />}>上传商品封面</Button>
+            <Button icon={<UploadOutlined />}>上传封面</Button>
           </Upload>
         </Form.Item>
         <Form.Item name="name" label="商品名称">
@@ -112,9 +130,19 @@ const AddProduct = () => {
     )
   }
 
+  const onBack = () => {
+    props.history.push('/admin/dashboard')
+  }
+
   return (
     <Layout title="添加商品" subTitle="露似珍珠月似弓🌼">
-      <Spin spinning={!category.category.loaded}>{addProductForm()}</Spin>
+      <PageHeader
+        className="site-page-header"
+        onBack={() => onBack()}
+        subTitle="商品添加"
+      >
+        <Spin spinning={!category.category.loaded}>{addProductForm()}</Spin>
+      </PageHeader>
     </Layout>
   )
 }
