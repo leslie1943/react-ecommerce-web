@@ -107,3 +107,12 @@ body {
     margin: 0 auto;
     text-align: center;
 }
+
+.card-label{
+    color: #909399;
+}
+
+.card-value {
+    padding: 0 5px;
+    color:#909399;
+}

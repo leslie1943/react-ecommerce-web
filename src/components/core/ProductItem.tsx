@@ -3,6 +3,7 @@ import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
 import { API } from '../../config'
 import { Product } from '../../store/models/product'
+import { ShoppingCartOutlined } from '@ant-design/icons'
 const { Title, Paragraph } = Typography
 
 interface Props {
@@ -25,23 +26,36 @@ const ProductItem: FC<Props> = ({ product }) => {
           <Button type="link">
             <Link to="/">查看详情</Link>
           </Button>,
-          <Button type="link">
+          <Button
+            type="link"
+            icon={<ShoppingCartOutlined style={{ color: 'gray' }} />}
+          >
             <Link to="/">加入购物车</Link>
           </Button>,
         ]}
       >
         <Title level={5}>{product.name}</Title>
-        <Paragraph ellipsis={{ rows: 2 }}>{product.description}</Paragraph>
+        <Paragraph ellipsis={{ rows: 1 }}>{product.description}</Paragraph>
         <Row>
-          <Col span="12">销量: {product.sold}</Col>
-          <Col span="12" style={{ textAlign: 'right' }}>
-            价格: {product.price}
+          <Col span="12">
+            <span className="card-label">当前销量: </span>
+            <span className="card-value">{product.sold}</span>
+          </Col>
+          <Col span="12">
+            <span className="card-label">会员价格: </span>
+            <span className="card-value">￥{product.price}</span>
           </Col>
         </Row>
         <Row>
-          <Col span="12">上架时间:{product.createdAt}</Col>
-          <Col span="12" style={{ textAlign: 'right' }}>
-            所属分类: {product.category.name}
+          <Col span="12">
+            <span className="card-label">所属分类: </span>
+            <span className="card-value">{product.category.name}</span>
+          </Col>
+          <Col span="12">
+            <span className="card-label">上架时间: </span>
+            <span className="card-value">
+              {product.createdAt.substring(0, 10)}
+            </span>
           </Col>
         </Row>
       </Card>
