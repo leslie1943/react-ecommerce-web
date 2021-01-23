@@ -2,6 +2,7 @@ import {
   GET_PRODUCT,
   GET_PRODUCT_SUCCESS,
   ProductUnion,
+  SEARCH_PRODUCT_SUCCESS,
 } from '../actions/product.action'
 import { Product } from '../models/product'
 
@@ -17,6 +18,8 @@ export interface ProductState {
     success: boolean
     products: Product[]
   }
+
+  search: Product[]
 }
 
 const initialState: ProductState = {
@@ -31,6 +34,8 @@ const initialState: ProductState = {
     success: false,
     products: [],
   },
+
+  search: [],
 }
 
 export default function categoryReducer(
@@ -56,6 +61,11 @@ export default function categoryReducer(
           success: true,
           products: action.payload,
         },
+      }
+    case SEARCH_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        search: action.products,
       }
     default:
       return state

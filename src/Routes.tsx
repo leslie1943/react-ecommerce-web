@@ -10,6 +10,7 @@ import AdminDashboard from './components/admin/AdminDashboard'
 import AdminRoute from './components/admin/AdminRoute'
 import AddCategory from './components/admin/AddCategory'
 import AddProduct from './components/admin/AddProduct'
+import Login from './components/epro/Login'
 
 const Routes = () => {
   return (
@@ -19,6 +20,8 @@ const Routes = () => {
         <Route path="/shop" component={Shop} />
         <Route path="/signin" component={SignIn} />
         <Route path="/signup" component={SignUp} />
+        {/* Epro */}
+        <Route path="/epro/login" component={Login} />
         {/* 受保护的路由: 非登录状态下不可访问 */}
         <PrivateRoute path="/user/dashboard" component={UserDashboard} />
         <AdminRoute path="/admin/dashboard" component={AdminDashboard} />
