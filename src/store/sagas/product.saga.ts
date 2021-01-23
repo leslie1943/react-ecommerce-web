@@ -5,6 +5,9 @@ import {
   GetProductAction,
   getProductSuccess,
   GET_PRODUCT,
+  SearchProductAction,
+  searchProductSuccess,
+  SEARCH_PRODUCT,
 } from '../actions/product.action'
 import { Product } from '../models/product'
 
@@ -18,7 +21,20 @@ function* handleGetProduct({ sortBy, limit, order }: GetProductAction) {
   yield put(getProductSuccess(response.data, sortBy))
 }
 
+function* handleSearchProduct({
+  payload: { search, category },
+}: SearchProductAction) {
+  const { data } = yield axios.get<Product[]>(`${API}/products/search`, {
+    params: {
+      search,
+      category,
+    },
+  })
+  yield put(searchProductSuccess(data))
+}
+
 export default function* productSaga() {
   // 获取分类类别的Action
   yield takeEvery(GET_PRODUCT, handleGetProduct)
+  yield takeEvery(SEARCH_PRODUCT, handleSearchProduct)
 }
