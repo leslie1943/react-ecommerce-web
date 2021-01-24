@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { API } from '../../config'
 import { Product } from '../../store/models/product'
 import { ShoppingCartOutlined } from '@ant-design/icons'
+import moment from 'moment'
 const { Title, Paragraph } = Typography
 
 interface Props {
@@ -54,7 +55,7 @@ const ProductItem: FC<Props> = ({ product }) => {
           <Col span="12">
             <span className="card-label">上架时间: </span>
             <span className="card-value">
-              {product.createdAt.substring(0, 10)}
+              {moment(product.createdAt).format('YYYY-MM-DD')}
             </span>
           </Col>
         </Row>

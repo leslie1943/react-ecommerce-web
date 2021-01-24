@@ -1,4 +1,13 @@
-import { Button, Col, Divider, Form, Input, Row, Select } from 'antd'
+import {
+  Button,
+  Col,
+  Divider,
+  Form,
+  Input,
+  Row,
+  Select,
+  Typography,
+} from 'antd'
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getCategory } from '../../store/actions/category.action'
@@ -7,6 +16,7 @@ import { AppState } from '../../store/reducers'
 import { CategoryState } from '../../store/reducers/category.reducer'
 import { ProductState } from '../../store/reducers/product.reducer'
 import ProductItem from './ProductItem'
+const { Title } = Typography
 
 const Search = () => {
   const dispatch = useDispatch()
@@ -56,6 +66,7 @@ const Search = () => {
         </Input.Group>
       </Form>
       <Divider />
+      {search.length > 0 && <Title level={5}>搜索结果</Title>}
       <Row gutter={[16, 16]}>
         {search.map((item) => (
           <Col span="6">{<ProductItem product={item} />}</Col>
