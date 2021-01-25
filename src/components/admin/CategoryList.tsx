@@ -1,4 +1,4 @@
-import { Button, Table, Modal } from 'antd'
+import { Button, Table, Modal, Divider } from 'antd'
 import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,6 +11,7 @@ import { AppState } from '../../store/reducers'
 import { CategoryState } from '../../store/reducers/category.reducer'
 import Layout from '../core/Layout'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
+import { Link } from 'react-router-dom'
 const { confirm } = Modal
 
 interface CategoryData extends Category {
@@ -49,6 +50,7 @@ const CategoryList = () => {
     })
   }
 
+  // table columns
   const columns = [
     {
       key: '_id',
@@ -73,6 +75,10 @@ const CategoryList = () => {
 
   return (
     <Layout title="分类列表" subTitle="故人西辞黄鹤楼🎽">
+      <Button type="link">
+        <Link to="/create/category">添加分类</Link>
+      </Button>
+      <Divider />
       <Table
         columns={columns}
         dataSource={categrory.category.result.map(
