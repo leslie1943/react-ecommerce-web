@@ -2,6 +2,9 @@ import axios from 'axios'
 import { put, takeEvery } from 'redux-saga/effects'
 import { API } from '../../config'
 import {
+  FilterProductAction,
+  filterProductSuccess,
+  FILTER_PRODUCT,
   GetProductAction,
   getProductSuccess,
   GET_PRODUCT,
@@ -33,8 +36,14 @@ function* handleSearchProduct({
   yield put(searchProductSuccess(data))
 }
 
+function* handleFilterProduct(action: FilterProductAction) {
+  const { data } = yield axios.post(`${API}/products/filter`, action.payload)
+  yield put(filterProductSuccess(data, action.payload.skip))
+}
+
 export default function* productSaga() {
   // 获取分类类别的Action
   yield takeEvery(GET_PRODUCT, handleGetProduct)
   yield takeEvery(SEARCH_PRODUCT, handleSearchProduct)
+  yield takeEvery(FILTER_PRODUCT, handleFilterProduct)
 }

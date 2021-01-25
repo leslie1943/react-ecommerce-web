@@ -37,7 +37,7 @@ export const getProductSuccess = (
 })
 
 /**
- * 搜索商品
+ * 🚀 搜索商品 🚀
  */
 
 export const SEARCH_PRODUCT = 'SEARCH_PRODUCT'
@@ -71,8 +71,58 @@ export const searchProductSuccess = (
   products,
 })
 
+/**
+ * 🚀 商品筛选 🚀
+ */
+export const FILTER_PRODUCT = 'FILTER_PRODUCT'
+export const FILTER_PRODUCT_SUCCESS = 'FILTER_PRODUCT_SUCCESS'
+
+interface FilterPayload {
+  order?: string
+  sortBy?: string
+  limit?: number
+  skip: number
+  filters?: {
+    category: string[]
+    price: Array<number>
+  }
+}
+
+export interface FilterProductAction {
+  type: typeof FILTER_PRODUCT
+  payload: FilterPayload
+}
+
+export interface FilterProductSuccessAction {
+  type: typeof FILTER_PRODUCT_SUCCESS
+  payload: {
+    size: number
+    data: Product[]
+  }
+  skip: number
+}
+
+export const filterProduct = (payload: FilterPayload): FilterProductAction => ({
+  type: FILTER_PRODUCT,
+  payload,
+})
+
+export const filterProductSuccess = (
+  payload: {
+    size: number
+    data: Product[]
+  },
+  skip: number
+): FilterProductSuccessAction => ({
+  type: FILTER_PRODUCT_SUCCESS,
+  payload,
+  skip,
+})
+
 export type ProductUnion =
   | GetProductAction
   | GetProductSuccessAction
   | SearchProductAction
   | SearchProductSuccessAction
+  | FilterProductAction
+  | FilterProductSuccessAction
