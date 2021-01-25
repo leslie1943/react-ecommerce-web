@@ -19,6 +19,10 @@ const AdminLink = () => {
           <Link to="/create/category">添加分类</Link>
         </Menu.Item>
         <Menu.Item>
+          <ShoppingCartOutlined />
+          <Link to="/category/list">分类列表</Link>
+        </Menu.Item>
+        <Menu.Item>
           <UserOutlined />
           <Link to="/create/product">添加产品</Link>
         </Menu.Item>
