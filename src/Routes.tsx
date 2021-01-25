@@ -11,6 +11,7 @@ import AdminRoute from './components/admin/AdminRoute'
 import AddCategory from './components/admin/AddCategory'
 import AddProduct from './components/admin/AddProduct'
 import Login from './components/epro/Login'
+import CategoryList from './components/admin/CategoryList'
 
 const Routes = () => {
   return (
@@ -26,6 +27,7 @@ const Routes = () => {
         <PrivateRoute path="/user/dashboard" component={UserDashboard} />
         <AdminRoute path="/admin/dashboard" component={AdminDashboard} />
         <AdminRoute path="/create/category" component={AddCategory} />
+        <AdminRoute path="/category/list" component={CategoryList} />
         <AdminRoute path="/create/product" component={AddProduct} />
       </Switch>
     </HashRouter>
