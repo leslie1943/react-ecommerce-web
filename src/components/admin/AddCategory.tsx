@@ -40,6 +40,7 @@ const AddCategory = (props: RouteProps) => {
             },
           }
         )
+        props.history.push('/category/list')
         message.success(`[${response.data.name}]分类添加成功!`)
       } catch (error) {
         message.error(`${error.response.data.error}`)
