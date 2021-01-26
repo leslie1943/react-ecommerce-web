@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Row, Col, Typography } from 'antd'
-import ProductItem from './ProductItem'
+import ProductCard from './ProductCard'
 import { useDispatch, useSelector } from 'react-redux'
 
 import Search from './Search'
@@ -29,7 +29,7 @@ const Home = () => {
       <Row gutter={[16, 16]}>
         {createdAt.products.map((product) => (
           <Col key={product._id} span="6">
-            <ProductItem product={product} />
+            <ProductCard product={product} />
           </Col>
         ))}
       </Row>
@@ -39,7 +39,7 @@ const Home = () => {
       <Row gutter={[16, 16]}>
         {sold.products.map((product) => (
           <Col key={product._id} span="6">
-            <ProductItem product={product} />
+            <ProductCard product={product} />
           </Col>
         ))}
       </Row>

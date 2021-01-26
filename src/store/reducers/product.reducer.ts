@@ -2,6 +2,8 @@ import {
   FILTER_PRODUCT,
   FILTER_PRODUCT_SUCCESS,
   GET_PRODUCT,
+  GET_PRODUCT_BY_ID,
+  GET_PRODUCT_BY_ID_SUCCESS,
   GET_PRODUCT_SUCCESS,
   ProductUnion,
   SEARCH_PRODUCT_SUCCESS,
@@ -31,6 +33,12 @@ export interface ProductState {
       data: Product[]
     }
   }
+
+  product: {
+    loaded: boolean
+    success: boolean
+    result: Product
+  }
 }
 
 const initialState: ProductState = {
@@ -58,6 +66,29 @@ const initialState: ProductState = {
     result: {
       size: 0,
       data: [],
+    },
+  },
+  // 产品详情默认值
+  product: {
+    loaded: false,
+    success: false,
+    result: {
+      _id: '',
+      name: '',
+      price: 0,
+      description: '',
+      category: {
+        _id: '',
+        name: '',
+        createAt: '',
+        updateAt: '',
+        __v: 0,
+      },
+      quantity: 0,
+      sold: 0,
+      photo: new FormData(),
+      shipping: false,
+      createdAt: '',
     },
   },
 }
@@ -100,7 +131,7 @@ export default function categoryReducer(
           success: false,
           result: {
             size: 0,
-            data: [],
+            data: state.filter.result.data, // 保持数据
           },
         },
       }
@@ -121,6 +152,27 @@ export default function categoryReducer(
           },
         },
       }
+    // 获取详情
+    case GET_PRODUCT_BY_ID:
+      return {
+        ...state,
+        product: {
+          ...state.product,
+          loaded: false,
+          success: false,
+        },
+      }
+    // 获取详情成功
+    case GET_PRODUCT_BY_ID_SUCCESS:
+      return {
+        ...state,
+        product: {
+          loaded: true,
+          success: true,
+          result: action.payload,
+        },
+      }
+
     default:
       return state
   }

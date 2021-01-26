@@ -12,23 +12,27 @@ import AddCategory from './components/admin/AddCategory'
 import AddProduct from './components/admin/AddProduct'
 import Login from './components/epro/Login'
 import CategoryList from './components/admin/CategoryList'
+import ProductDetail from './components/core/ProductDetail'
 
 const Routes = () => {
   return (
     <HashRouter>
       <Switch>
+        {/* 一般路由 */}
+        <Route path="/epro/login" component={Login} />
         <Route path="/" component={Home} exact />
         <Route path="/shop" component={Shop} />
         <Route path="/signin" component={SignIn} />
         <Route path="/signup" component={SignUp} />
-        {/* Epro */}
-        <Route path="/epro/login" component={Login} />
+        <Route path="/product/:productId" component={ProductDetail} />
         {/* 受保护的路由: 非登录状态下不可访问 */}
         <PrivateRoute path="/user/dashboard" component={UserDashboard} />
         <AdminRoute path="/admin/dashboard" component={AdminDashboard} />
         <AdminRoute path="/create/category" component={AddCategory} />
         <AdminRoute path="/category/list" component={CategoryList} />
         <AdminRoute path="/create/product" component={AddProduct} />
+        {/* Epro */}
+        <Route path="/epro/login" component={Login} />
       </Switch>
     </HashRouter>
   )

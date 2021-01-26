@@ -9,10 +9,39 @@ const { Title, Paragraph } = Typography
 
 interface Props {
   product: Product
+  showViewProduct?: boolean
+  showCartBtn?: boolean
 }
 
 //  FC<Props>只是定义参数的类型,真正的Props还是需要在()操作
-const ProductItem: FC<Props> = ({ product }) => {
+const ProductCard: FC<Props> = ({
+  product,
+  showViewProduct = true,
+  showCartBtn = true,
+}) => {
+  const showButtons = () => {
+    let buttonArray = []
+    if (showViewProduct) {
+      buttonArray.push(
+        <Button type="link">
+          <Link to={`/product/${product._id}`}>查看详情</Link>
+        </Button>
+      )
+    }
+
+    if (showCartBtn) {
+      buttonArray.push(
+        <Button
+          type="link"
+          icon={<ShoppingCartOutlined style={{ color: 'gray' }} />}
+        >
+          <Link to="/">加入购物车</Link>
+        </Button>
+      )
+    }
+
+    return buttonArray
+  }
   return (
     <div>
       <Card
@@ -23,17 +52,7 @@ const ProductItem: FC<Props> = ({ product }) => {
             src={`${API}/product/photo/${product._id}`}
           />
         }
-        actions={[
-          <Button type="link">
-            <Link to="/">查看详情</Link>
-          </Button>,
-          <Button
-            type="link"
-            icon={<ShoppingCartOutlined style={{ color: 'gray' }} />}
-          >
-            <Link to="/">加入购物车</Link>
-          </Button>,
-        ]}
+        actions={showButtons()}
       >
         <Title level={5}>{product.name}</Title>
         <Paragraph ellipsis={{ rows: 1 }}>{product.description}</Paragraph>
@@ -64,4 +83,4 @@ const ProductItem: FC<Props> = ({ product }) => {
   )
 }
 
-export default ProductItem
+export default ProductCard
