@@ -2,13 +2,13 @@ import { Col, Divider, Input, Row } from 'antd'
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { CartItem, getCart } from '../../helpers/cart'
 import CartItemFC from './CartItemFC'
+import CartPay from './CartPay'
 import CartTotalPrice from './CartTotalPrice'
 import Layout from './Layout'
 
 const Cart = () => {
   const [cart, setCart] = useState<CartItem[]>([])
   const [address, setAddress] = useState<string>('')
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [totalPrice, setTotalPrice] = useState<number>(0)
 
   useEffect(() => {
@@ -51,6 +51,9 @@ const Cart = () => {
           <Divider />
           <Row>
             <CartTotalPrice setTotalPrice={setTotalPrice} cart={cart} />
+          </Row>
+          <Row>
+            <CartPay totalPrice={totalPrice} cart={cart} address={address} />
           </Row>
         </Col>
       </Row>

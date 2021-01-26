@@ -24,3 +24,5 @@ yarn-error.log*
 
 # eslint build cache
 .eslintcache
+
+.sandbox

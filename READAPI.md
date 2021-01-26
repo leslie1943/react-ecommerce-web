@@ -595,7 +595,7 @@ Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmOWFiNzFj
 
 | 请求地址                           | 请求方式 |
 | ---------------------------------- | -------- |
-| http://fullstack.net.cn/api/alipay | GET      |
+| http://fullstack.net.cn/api/alipay | POST      |
 
 ```react
 {
@@ -615,6 +615,8 @@ Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmOWFiNzFj
   result: "支付地址"
 }
 ```
+
+http://openhome.alipay.com/platform/appDaily.htm?tab=account
 
 ### 6. 订单管理
 
