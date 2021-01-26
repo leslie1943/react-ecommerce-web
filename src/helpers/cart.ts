@@ -90,3 +90,17 @@ export const deleteItem = (productId: string) => {
   }
   return cart
 }
+
+/**
+ * 获取商品数量
+ */
+
+export const itemCount = () => {
+  if (typeof window !== 'undefined') {
+    if (getItem('cart')) {
+      // 断言是CartItem的数组
+      return (getItem('cart') as CartItem[]).length
+    }
+  }
+  return 0
+}
