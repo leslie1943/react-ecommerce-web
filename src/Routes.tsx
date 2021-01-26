@@ -14,6 +14,7 @@ import Login from './components/epro/Login'
 import CategoryList from './components/admin/CategoryList'
 import ProductDetail from './components/core/ProductDetail'
 import Cart from './components/core/Cart'
+import PaySuccess from './components/core/PaySuccess'
 
 const Routes = () => {
   return (
@@ -27,6 +28,7 @@ const Routes = () => {
         <Route path="/signup" component={SignUp} />
         <Route path="/product/:productId" component={ProductDetail} />
         <Route path="/cart" component={Cart} />
+        <Route path="/paysuccess" component={PaySuccess} />
         {/* 受保护的路由: 非登录状态下不可访问 */}
         <PrivateRoute path="/user/dashboard" component={UserDashboard} />
         <AdminRoute path="/admin/dashboard" component={AdminDashboard} />
