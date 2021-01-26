@@ -1,6 +1,8 @@
 import { Button, Form, Input, message, PageHeader } from 'antd'
 import axios from 'axios'
+import { push } from 'connected-react-router'
 import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { RouteComponentProps } from 'react-router-dom'
 import { API } from '../../config'
 import { isAuth } from '../../helpers/auth'
@@ -21,6 +23,8 @@ interface RouteProps extends RouteComponentProps<any> {
 const AddCategory = (props: RouteProps) => {
   //   console.info(props.isLeslie)
 
+  const dispatch = useDispatch()
+
   // 定义页面状态数据
   const [name, setName] = useState<string>('')
   // 获取本地数据
@@ -40,7 +44,8 @@ const AddCategory = (props: RouteProps) => {
             },
           }
         )
-        props.history.push('/category/list')
+        // props.history.push('/category/list')
+        dispatch(push('/category/list'))
         message.success(`[${response.data.name}]分类添加成功!`)
       } catch (error) {
         message.error(`${error.response.data.error}`)

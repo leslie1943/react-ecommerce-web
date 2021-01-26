@@ -5,6 +5,9 @@ import { API } from '../../config'
 import { Product } from '../../store/models/product'
 import { ShoppingCartOutlined } from '@ant-design/icons'
 import moment from 'moment'
+import { addItem } from '../../helpers/cart'
+import { useDispatch } from 'react-redux'
+import { push } from 'connected-react-router'
 const { Title, Paragraph } = Typography
 
 interface Props {
@@ -19,6 +22,15 @@ const ProductCard: FC<Props> = ({
   showViewProduct = true,
   showCartBtn = true,
 }) => {
+  const dispatch = useDispatch()
+
+  // 添加物品到购物车
+  const addToCart = () => {
+    addItem(product, () => {
+      dispatch(push('/cart'))
+    })
+  }
+
   const showButtons = () => {
     let buttonArray = []
     if (showViewProduct) {
@@ -33,10 +45,9 @@ const ProductCard: FC<Props> = ({
       buttonArray.push(
         <Button
           type="link"
+          onClick={addToCart}
           icon={<ShoppingCartOutlined style={{ color: 'gray' }} />}
-        >
-          <Link to="/">加入购物车</Link>
-        </Button>
+        ></Button>
       )
     }
 
