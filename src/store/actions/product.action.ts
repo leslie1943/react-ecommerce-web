@@ -119,6 +119,36 @@ export const filterProductSuccess = (
   skip,
 })
 
+// 通过产品id获取产品详情
+export const GET_PRODUCT_BY_ID = 'GET_PRODUCT_BY_ID'
+export const GET_PRODUCT_BY_ID_SUCCESS = 'GET_PRODUCT_BY_ID_SUCCESS'
+
+export interface GetProductByIdAction {
+  type: typeof GET_PRODUCT_BY_ID
+  payload: {
+    productId: string
+  }
+}
+
+export interface GetProductByIdSuccessAction {
+  type: typeof GET_PRODUCT_BY_ID_SUCCESS
+  payload: Product
+}
+
+export const getProductById = (payload: {
+  productId: string
+}): GetProductByIdAction => ({
+  type: GET_PRODUCT_BY_ID,
+  payload,
+})
+
+export const getProductByIdSuccess = (
+  payload: Product
+): GetProductByIdSuccessAction => ({
+  type: GET_PRODUCT_BY_ID_SUCCESS,
+  payload,
+})
+
 export type ProductUnion =
   | GetProductAction
   | GetProductSuccessAction
@@ -126,3 +156,5 @@ export type ProductUnion =
   | SearchProductSuccessAction
   | FilterProductAction
   | FilterProductSuccessAction
+  | GetProductByIdAction
+  | GetProductByIdSuccessAction

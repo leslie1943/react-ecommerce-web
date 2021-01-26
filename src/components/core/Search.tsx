@@ -15,7 +15,7 @@ import { searchProduct } from '../../store/actions/product.action'
 import { AppState } from '../../store/reducers'
 import { CategoryState } from '../../store/reducers/category.reducer'
 import { ProductState } from '../../store/reducers/product.reducer'
-import ProductItem from './ProductItem'
+import ProductCard from './ProductCard'
 const { Title } = Typography
 
 const Search = () => {
@@ -69,7 +69,7 @@ const Search = () => {
       {search.length > 0 && <Title level={5}>搜索结果</Title>}
       <Row gutter={[16, 16]}>
         {search.map((item) => (
-          <Col span="6">{<ProductItem product={item} />}</Col>
+          <Col span="6">{<ProductCard product={item} />}</Col>
         ))}
       </Row>
     </>

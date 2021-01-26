@@ -6,8 +6,11 @@ import {
   filterProductSuccess,
   FILTER_PRODUCT,
   GetProductAction,
+  GetProductByIdAction,
+  getProductByIdSuccess,
   getProductSuccess,
   GET_PRODUCT,
+  GET_PRODUCT_BY_ID,
   SearchProductAction,
   searchProductSuccess,
   SEARCH_PRODUCT,
@@ -41,9 +44,18 @@ function* handleFilterProduct(action: FilterProductAction) {
   yield put(filterProductSuccess(data, action.payload.skip))
 }
 
+function* handleGetProductById(action: GetProductByIdAction) {
+  const { data } = yield axios.get<Product>(
+    `${API}/product/${action.payload.productId}`,
+    {}
+  )
+  yield put(getProductByIdSuccess(data))
+}
+
 export default function* productSaga() {
   // 获取分类类别的Action
   yield takeEvery(GET_PRODUCT, handleGetProduct)
   yield takeEvery(SEARCH_PRODUCT, handleSearchProduct)
   yield takeEvery(FILTER_PRODUCT, handleFilterProduct)
+  yield takeEvery(GET_PRODUCT_BY_ID, handleGetProductById)
 }
