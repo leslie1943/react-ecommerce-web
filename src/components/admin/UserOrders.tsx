@@ -19,7 +19,7 @@ import { Order, OrderWithKey } from '../../store/models/order'
 import Layout from '../core/Layout'
 const { Title, Text } = Typography
 
-const Orders = () => {
+const UserOrders = () => {
   const { user, token } = isAuth() as Jwt
   const [orders, setOrders] = useState<Order[]>([])
 
@@ -173,4 +173,4 @@ const Orders = () => {
   )
 }
 
-export default Orders
+export default UserOrders
