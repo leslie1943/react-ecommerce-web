@@ -8,7 +8,6 @@ import { convertSearchToObject } from '../../utils/convert'
 const PaySuccess = () => {
   const location = useLocation()
   const searchObject = convertSearchToObject(location.search)
-
   return (
     <Layout title="支付完成" subTitle="姑苏城外寒山寺🥝">
       <Result

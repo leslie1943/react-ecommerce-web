@@ -3,7 +3,6 @@ import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
 import { API } from '../../config'
 import { Product } from '../../store/models/product'
-import { ShoppingCartOutlined } from '@ant-design/icons'
 import moment from 'moment'
 import { addItem } from '../../helpers/cart'
 import { useDispatch } from 'react-redux'
@@ -43,11 +42,9 @@ const ProductCard: FC<Props> = ({
 
     if (showCartBtn) {
       buttonArray.push(
-        <Button
-          type="link"
-          onClick={addToCart}
-          icon={<ShoppingCartOutlined style={{ color: 'gray' }} />}
-        ></Button>
+        <Button type="link" onClick={addToCart}>
+          加入购物车
+        </Button>
       )
     }
 

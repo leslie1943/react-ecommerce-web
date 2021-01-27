@@ -1,11 +1,13 @@
-import React from 'react'
-import { Menu } from 'antd'
+import React, { useContext, useEffect } from 'react'
+import { Badge, Menu } from 'antd'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { AppState } from '../../store/reducers'
 import { RouterState } from 'connected-react-router'
 import { isAuth } from '../../helpers/auth'
 import { Jwt } from '../../store/models/auth'
+import { ContextCartTotal } from '../../contextStore'
+import { itemCount } from '../../helpers/cart'
 
 function useActive(currentPath: string, path: string) {
   return currentPath === path ? 'ant-menu-item-selected' : ''
@@ -20,9 +22,19 @@ const Navigation = () => {
   const pathname = router.location.pathname
   const isHome = useActive(pathname, '/')
   const isShop = useActive(pathname, '/shop')
+  const isCart = useActive(pathname, '/cart')
+
   const isSignin = useActive(pathname, '/signin')
   const isSignup = useActive(pathname, '/signup')
   const isDashboard = useActive(pathname, getDashboardUrl())
+
+  // 使用 useContext 钩子函数 来使用已经定义好的 ContextProvider
+  const [count, setCount] = useContext(ContextCartTotal)
+
+  // itemCount: 用来获取商品数量
+  useEffect(() => {
+    setCount(itemCount())
+  })
 
   // 根据角色获取url: 如果要改写成箭头函数, 需要把代码放到调用之前
   function getDashboardUrl() {
@@ -42,8 +54,15 @@ const Navigation = () => {
       <Menu.Item className={isHome}>
         <Link to="/">首页</Link>
       </Menu.Item>
+
       <Menu.Item className={isShop}>
         <Link to="/shop">商城</Link>
+      </Menu.Item>
+      <Menu.Item className={isCart}>
+        <Link to="/cart">
+          购物车
+          <Badge count={count} offset={[5, -10]} />
+        </Link>
       </Menu.Item>
       {!isAuth() && (
         <>
@@ -59,6 +78,13 @@ const Navigation = () => {
         <>
           <Menu.Item className={isDashboard}>
             <Link to={getDashboardUrl()}>Dashboard</Link>
+          </Menu.Item>
+        </>
+      )}
+      {isAuth() && (
+        <>
+          <Menu.Item className={isDashboard}>
+            欢迎你, {(isAuth() as Jwt).user.name}
           </Menu.Item>
         </>
       )}
