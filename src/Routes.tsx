@@ -15,6 +15,7 @@ import CategoryList from './components/admin/CategoryList'
 import ProductDetail from './components/core/ProductDetail'
 import Cart from './components/core/Cart'
 import PaySuccess from './components/core/PaySuccess'
+import Orders from './components/admin/Orders'
 
 const Routes = () => {
   return (
@@ -35,6 +36,7 @@ const Routes = () => {
         <AdminRoute path="/create/category" component={AddCategory} />
         <AdminRoute path="/category/list" component={CategoryList} />
         <AdminRoute path="/create/product" component={AddProduct} />
+        <AdminRoute path="/admin/orders" component={Orders} />
         {/* Epro */}
         <Route path="/epro/login" component={Login} />
       </Switch>

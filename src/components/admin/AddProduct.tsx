@@ -8,8 +8,9 @@ import {
   message,
   PageHeader,
 } from 'antd'
-import React, { FC, useEffect, useState } from 'react'
-import { RouteComponentProps } from 'react-router-dom'
+import React, { /** FC ,*/ useEffect, useState } from 'react'
+// import { RouteComponentProps } from 'react-router-dom'
+import { push } from 'connected-react-router'
 
 import Layout from '../core/Layout'
 
@@ -24,10 +25,11 @@ import { API } from '../../config'
 import { isAuth } from '../../helpers/auth'
 import { Jwt } from '../../store/models/auth'
 
-interface RouteProps extends RouteComponentProps<any> {}
+// interface RouteProps extends RouteComponentProps<any> {}
 
 //  FC<Props>只是定义参数的类型,真正的Props还是需要在()操作
-const AddProduct: FC<RouteProps> = (props) => {
+// const AddProduct: FC<RouteProps> = (props) => {
+const AddProduct = () => {
   const dispatch = useDispatch()
 
   // 获取本地数据
@@ -131,7 +133,8 @@ const AddProduct: FC<RouteProps> = (props) => {
   }
 
   const onBack = () => {
-    props.history.push('/admin/dashboard')
+    // props.history.push()
+    dispatch(push('/admin/dashboard'))
   }
 
   return (

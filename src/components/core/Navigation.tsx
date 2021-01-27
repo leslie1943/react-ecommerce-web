@@ -28,7 +28,7 @@ const Navigation = () => {
   const isSignup = useActive(pathname, '/signup')
   const isDashboard = useActive(pathname, getDashboardUrl())
 
-  // 使用 useContext 钩子函数
+  // 使用 useContext 钩子函数 来使用已经定义好的 ContextProvider
   const [count, setCount] = useContext(ContextCartTotal)
 
   // itemCount: 用来获取商品数量
@@ -54,6 +54,7 @@ const Navigation = () => {
       <Menu.Item className={isHome}>
         <Link to="/">首页</Link>
       </Menu.Item>
+
       <Menu.Item className={isShop}>
         <Link to="/shop">商城</Link>
       </Menu.Item>
@@ -77,6 +78,13 @@ const Navigation = () => {
         <>
           <Menu.Item className={isDashboard}>
             <Link to={getDashboardUrl()}>Dashboard</Link>
+          </Menu.Item>
+        </>
+      )}
+      {isAuth() && (
+        <>
+          <Menu.Item className={isDashboard}>
+            欢迎你, {(isAuth() as Jwt).user.name}
           </Menu.Item>
         </>
       )}

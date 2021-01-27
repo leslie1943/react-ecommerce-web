@@ -50,7 +50,7 @@ const CategoryList = () => {
     })
   }
 
-  // table columns
+  // Table columns
   const columns = [
     {
       key: '_id',
