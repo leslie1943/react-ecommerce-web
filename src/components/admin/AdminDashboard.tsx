@@ -2,8 +2,9 @@ import { Row, Col } from 'antd'
 import React from 'react'
 import Layout from '../core/Layout'
 
-import AdminInfo from './AdminInfo'
+// import AdminInfo from './AdminInfo'
 import AdminLink from './AdminLink'
+import UserInfo from './UserInfo'
 
 const AdminDashboard = () => {
   return (
@@ -13,7 +14,7 @@ const AdminDashboard = () => {
           <AdminLink />
         </Col>
         <Col span="21">
-          <AdminInfo />
+          <UserInfo />
         </Col>
       </Row>
     </Layout>

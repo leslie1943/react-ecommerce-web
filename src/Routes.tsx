@@ -15,7 +15,8 @@ import CategoryList from './components/admin/CategoryList'
 import ProductDetail from './components/core/ProductDetail'
 import Cart from './components/core/Cart'
 import PaySuccess from './components/core/PaySuccess'
-import Orders from './components/admin/Orders'
+import AdminOrders from './components/admin/AdminOrders'
+import UserOrders from './components/admin/UserOrders'
 
 const Routes = () => {
   return (
@@ -32,11 +33,12 @@ const Routes = () => {
         <Route path="/paysuccess" component={PaySuccess} />
         {/* 受保护的路由: 非登录状态下不可访问 */}
         <PrivateRoute path="/user/dashboard" component={UserDashboard} />
+        <PrivateRoute path="/user/orders" component={UserOrders} />
         <AdminRoute path="/admin/dashboard" component={AdminDashboard} />
         <AdminRoute path="/create/category" component={AddCategory} />
         <AdminRoute path="/category/list" component={CategoryList} />
         <AdminRoute path="/create/product" component={AddProduct} />
-        <AdminRoute path="/admin/orders" component={Orders} />
+        <AdminRoute path="/admin/orders" component={AdminOrders} />
         {/* Epro */}
         <Route path="/epro/login" component={Login} />
       </Switch>
